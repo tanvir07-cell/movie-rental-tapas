@@ -5,7 +5,7 @@ import Ratings from "./Ratings";
 import MovieModal from "./MovieModal";
 import { useCart } from "../../context/CartController";
 
-const MovieCard = ({ cover, title, description, genre, rating, price }) => {
+const MovieCard = ({ cover, title, description, genre, rating, price, id }) => {
   const [openMovie, setOpenMovie] = useState(false);
 
   // using from context custom hook
@@ -37,6 +37,7 @@ const MovieCard = ({ cover, title, description, genre, rating, price }) => {
           genre={genre}
           rating={rating}
           price={price}
+          id={id}
           onClose={() => setOpenMovie(false)}
         />
       )}
@@ -54,13 +55,14 @@ const MovieCard = ({ cover, title, description, genre, rating, price }) => {
               href="#"
               onClick={(e) => {
                 e.stopPropagation();
-                return addToCart({
+                addToCart({
                   cover,
                   title,
                   description,
                   genre,
                   rating,
                   price,
+                  id,
                 });
               }}
             >

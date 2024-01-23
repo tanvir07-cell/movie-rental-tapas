@@ -18,6 +18,7 @@ const MovieList = () => {
               genre={genre}
               rating={rating}
               price={price}
+              id={id}
             />
           )
         )}

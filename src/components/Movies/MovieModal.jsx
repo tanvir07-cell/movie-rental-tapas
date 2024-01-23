@@ -2,8 +2,18 @@ import React from "react";
 import Modal from "../Modal";
 import { getImage } from "../../utils/getImage";
 import TAG from "../../assets/tag.svg";
+import { useCart } from "../../context/CartController";
 
-const MovieModal = ({ onClose, cover, title, description, genre, price }) => {
+const MovieModal = ({
+  onClose,
+  cover,
+  title,
+  description,
+  genre,
+  price,
+  id,
+}) => {
+  const { cart, addToCart } = useCart();
   return (
     <>
       <Modal>
@@ -32,6 +42,18 @@ const MovieModal = ({ onClose, cover, title, description, genre, price }) => {
                   <a
                     className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                     href="#"
+                    onClick={() => {
+                      addToCart({
+                        cover,
+                        title,
+                        description,
+                        genre,
+                        price,
+                        id,
+                      });
+
+                      onClose();
+                    }}
                   >
                     <img src={TAG} alt="" />
                     <span>${price} | Add to Cart</span>

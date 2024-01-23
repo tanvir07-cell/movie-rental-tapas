@@ -53,7 +53,12 @@ const Nav = () => {
                 href="#"
                 onClick={() => setShowCart(!showCart)}
               >
-                <img src={CART} width="24" height="24" alt="" />
+                <img src={CART} width="24" height="24" alt="cart" />
+                {cart.length > 0 && (
+                  <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                    {cart.length}
+                  </span>
+                )}
               </a>
             </li>
           </ul>
