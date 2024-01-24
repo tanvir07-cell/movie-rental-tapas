@@ -12,10 +12,10 @@ import { useTheme } from "../../context/ThemeControlloer";
 const Nav = () => {
   const [showCart, setShowCart] = useState(false);
 
-  const { cart } = useCart();
+  const { state } = useCart();
   const { theme, toggleTheme } = useTheme();
 
-  console.log(cart);
+  console.log(state.cart);
 
   return (
     <>
@@ -59,9 +59,9 @@ const Nav = () => {
 
               >
                 <img src={CART} width="24" height="24" alt="cart" />
-                {cart.length > 0 && (
+                {state.cart.length > 0 && (
                   <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
-                    {cart.length}
+                    {state.cart.length}
                   </span>
                 )}
               </a>

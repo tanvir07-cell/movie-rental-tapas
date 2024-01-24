@@ -9,7 +9,7 @@ const MovieCard = ({ cover, title, description, genre, rating, price, id }) => {
   const [openMovie, setOpenMovie] = useState(false);
 
   // using from context custom hook
-  const { cart, addToCart } = useCart();
+  const { state, addToCart } = useCart();
 
   const handleOpenMovie = () => {
     setOpenMovie(true);

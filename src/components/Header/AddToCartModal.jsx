@@ -5,12 +5,11 @@ import { getImage } from "../../utils/getImage";
 
 const AddToCartModal = ({ onClose }) => {
   // const [filteredMovies, setFilteredMovies] = useState([]);
-  const { cart, setCart } = useCart();
+  const { state, addToCart, dispatch } = useCart();
 
   const handleFilteredMovies = (e, id) => {
     e.preventDefault();
-    const newMovies = cart.filter((movie) => movie.id !== id);
-    setCart(newMovies);
+    dispatch({ type: "REMOVE_FROM_CART", payload: id });
   };
 
   return (
@@ -22,7 +21,7 @@ const AddToCartModal = ({ onClose }) => {
           </h2>
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
             <div className="grid grid-cols-[1fr_auto] gap-4">
-              {cart.map((item, index) => (
+              {state.cart.map((item, index) => (
                 <Fragment key={index}>
                   <div className="flex items-center gap-4">
                     <img
