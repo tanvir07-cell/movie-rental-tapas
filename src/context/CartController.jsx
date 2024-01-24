@@ -1,4 +1,10 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
@@ -11,7 +17,7 @@ const cartReducer = (state, action) => {
     default:
       return state;
   }
-}
+};
 
 // const CartContext = React.createContext({
 //   cart: [],
@@ -21,24 +27,28 @@ const cartReducer = (state, action) => {
 
 const CartContext = React.createContext({
   state: { cart: [] },
-  addToCart: () => { },
-  dispatch: () => { },
-})
-
+  addToCart: () => {},
+  dispatch: () => {},
+});
 
 const CartController = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { cart: [] })
+  const [state, dispatch] = useReducer(cartReducer, { cart: [] });
 
-  const addToCart = (movie) => {
-    if (state.cart.find(item => item.id === movie.id)) {
-      alert(`${movie.title} already in cart`)
-    }
-    else {
-      dispatch({ type: "ADD_TO_CART", payload: movie });
-    }
-  };
+  const addToCart = useCallback(
+    (movie) => {
+      if (state.cart.find((item) => item.id === movie.id)) {
+        alert(`${movie.title} already in cart`);
+      } else {
+        dispatch({ type: "ADD_TO_CART", payload: movie });
+      }
+    },
+    [state.cart]
+  );
 
-  const value = { state, addToCart, dispatch };
+  const value = useMemo(
+    () => ({ state, addToCart, dispatch }),
+    [state, addToCart]
+  );
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
